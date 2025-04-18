@@ -7,7 +7,9 @@ export async function POST(req: Request) {
   const { messages } = await req.json();
 
   const response = await streamText({
-    model: openai("gpt-4o"), // ✅ CORRECT way — only one argument
+    model: openai({
+      apiKey: process.env.OPENAI_API_KEY!,
+    }).chat("gpt-4o"),
     messages,
   });
 
